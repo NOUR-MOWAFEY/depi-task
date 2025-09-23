@@ -1,4 +1,5 @@
-import 'package:depi_task/screens/home_screen.dart';
+import 'dart:developer';
+
 import 'package:depi_task/screens/register_screen.dart';
 import 'package:depi_task/utils/app_strings.dart';
 import 'package:depi_task/widgets/form_body.dart';
@@ -9,22 +10,28 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> loginKey = GlobalKey<FormState>();
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
       body: FormBody(
         mainButtonTitle: AppStrings.login,
         secondButtonTitle: AppStrings.register,
         text: AppStrings.loginScreenText,
-        mainButtonOnTap: () => Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-          (route) => false,
-        ),
+        mainButtonOnTap: () {
+          if (loginKey.currentState!.validate()) {
+            log('Validated');
+          }
+        },
         secondButtonOnTap: () => Navigator.pushAndRemoveUntil(
           context,
           _createRoute(RegisterScreen()),
           (route) => false,
         ),
+        globalKey: loginKey,
+        emailController: emailController,
+        passwordController: passwordController,
       ),
     );
   }

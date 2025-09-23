@@ -8,6 +8,10 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final registerKey = GlobalKey<FormState>();
+    final emailController = TextEditingController();
+    final passwordController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(title: Text(AppStrings.register)),
       body: FormBody(
@@ -19,6 +23,18 @@ class RegisterScreen extends StatelessWidget {
           _createRoute(LoginScreen()),
           (route) => false,
         ),
+        globalKey: registerKey,
+        emailController: emailController,
+        passwordController: passwordController,
+        mainButtonOnTap: () {
+          if (registerKey.currentState!.validate()) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              _createRoute(LoginScreen()),
+              (route) => false,
+            );
+          }
+        },
       ),
     );
   }
