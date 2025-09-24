@@ -1,6 +1,7 @@
-import 'package:depi_task/utils/app_colors.dart';
-import 'package:depi_task/utils/app_images.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/app_colors.dart';
+import '../utils/app_images.dart';
 
 class HomeContainer extends StatelessWidget {
   const HomeContainer({
@@ -29,10 +30,19 @@ class HomeContainer extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(16.0),
-              child: Image.asset(AppImages.person, width: 150),
+              borderRadius: BorderRadiusGeometry.only(
+                topLeft: Radius.circular(16),
+                bottomLeft: Radius.circular(16),
+              ),
+              child: Image.asset(
+                AppImages.person,
+                width: 130,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
+          SizedBox(width: 2.0),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(12.0),

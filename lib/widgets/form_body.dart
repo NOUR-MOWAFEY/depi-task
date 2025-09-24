@@ -1,9 +1,9 @@
-import 'package:depi_task/utils/app_colors.dart';
-import 'package:depi_task/utils/app_images.dart';
-import 'package:depi_task/utils/app_strings.dart';
-import 'package:depi_task/utils/app_validator.dart';
-import 'package:depi_task/widgets/custom_button.dart';
-import 'package:depi_task/widgets/custom_text_form_field.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_images.dart';
+import '../utils/app_strings.dart';
+import '../utils/app_validator.dart';
+import 'custom_button.dart';
+import 'custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class FormBody extends StatelessWidget {

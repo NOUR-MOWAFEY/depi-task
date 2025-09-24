@@ -1,5 +1,6 @@
-import 'package:depi_task/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -35,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
     Color? color,
     double? borderWidth,
   }) => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(25),
+    borderRadius: BorderRadius.circular(30),
     borderSide: BorderSide(
       color: color ?? AppColors.white,
       width: borderWidth ?? 1,

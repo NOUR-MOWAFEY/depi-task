@@ -1,6 +1,7 @@
-import 'package:depi_task/cubits/popular_cubit/cubit/popular_cubit.dart';
-import 'package:depi_task/widgets/home_container.dart';
 import 'package:flutter/material.dart';
+
+import '../cubits/popular_cubit/popular_cubit.dart';
+import 'home_container.dart';
 
 class SuccessHomeScreenBody extends StatelessWidget {
   const SuccessHomeScreenBody({super.key, required this.state});

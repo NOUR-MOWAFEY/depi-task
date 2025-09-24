@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:depi_task/models/popular_model.dart';
-import 'package:depi_task/services/popular_service.dart';
 import 'package:meta/meta.dart';
+
+import '../../models/popular_model.dart';
+import '../../services/popular_service.dart';
 
 part 'popular_state.dart';
 

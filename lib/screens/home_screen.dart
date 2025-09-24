@@ -1,11 +1,13 @@
-import 'package:depi_task/cubits/popular_cubit/cubit/popular_cubit.dart';
-import 'package:depi_task/models/popular_model.dart';
-import 'package:depi_task/utils/app_strings.dart';
-import 'package:depi_task/widgets/failed_home_screen_body.dart';
-import 'package:depi_task/widgets/loading_home_screen_body.dart';
-import 'package:depi_task/widgets/success_home_screen_body.dart';
+import '../widgets/exit_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubits/popular_cubit/popular_cubit.dart';
+import '../models/popular_model.dart';
+import '../utils/app_strings.dart';
+import '../widgets/failed_home_screen_body.dart';
+import '../widgets/loading_home_screen_body.dart';
+import '../widgets/success_home_screen_body.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -27,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return BlocBuilder<PopularCubit, PopularState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(title: Text(AppStrings.home)),
+          appBar: AppBar(
+            title: Text(AppStrings.home),
+            actions: [ExitIcon(), SizedBox(width: 6)],
+          ),
           body: switch (state) {
             PopularInitial() => const LoadingHomeScreenBody(),
             PopularLoading() => const LoadingHomeScreenBody(),

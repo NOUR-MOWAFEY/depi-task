@@ -1,5 +1,6 @@
-import 'package:depi_task/models/popular_model.dart';
 import 'package:dio/dio.dart';
+
+import '../models/popular_model.dart';
 
 class PopularService {
   final String baseUrl =

@@ -1,5 +1,6 @@
-import 'package:depi_task/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/app_colors.dart';
 
 class LoadingHomeScreenBody extends StatelessWidget {
   const LoadingHomeScreenBody({super.key});

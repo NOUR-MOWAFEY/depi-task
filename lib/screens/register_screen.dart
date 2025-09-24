@@ -1,19 +1,28 @@
-import 'package:depi_task/screens/login_screen.dart';
-import 'package:depi_task/utils/app_strings.dart';
-import 'package:depi_task/widgets/form_body.dart';
 import 'package:flutter/material.dart';
 
+import '../helper/animation.dart';
 import '../helper/firebase_methods.dart';
+import '../helper/show_snack_bar.dart';
+import '../utils/app_strings.dart';
+import '../widgets/form_body.dart';
+import 'login_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final registerKey = GlobalKey<FormState>();
-    final emailController = TextEditingController();
-    final passwordController = TextEditingController();
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
 
+class _RegisterScreenState extends State<RegisterScreen> {
+  final registerKey = GlobalKey<FormState>();
+
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text(AppStrings.register)),
       body: FormBody(
@@ -22,41 +31,41 @@ class RegisterScreen extends StatelessWidget {
         text: AppStrings.registerScreenText,
         secondButtonOnTap: () => Navigator.pushAndRemoveUntil(
           context,
-          _createRoute(const LoginScreen()),
+          CustomAnimation.createRouteForSlideFromLeft(const LoginScreen()),
           (route) => false,
         ),
         globalKey: registerKey,
         emailController: emailController,
         passwordController: passwordController,
-        mainButtonOnTap: () {
+        mainButtonOnTap: () async {
           if (registerKey.currentState!.validate()) {
-            FirebaseMethods.createAccount(
-              emailAddress: emailController.text,
-              password: passwordController.text,
-            );
-            Navigator.pushAndRemoveUntil(
-              context,
-              _createRoute(const LoginScreen()),
-              (route) => false,
-            );
+            try {
+              await FirebaseMethods.createAccount(
+                emailAddress: emailController.text,
+                password: passwordController.text,
+              );
+              if (context.mounted) {
+                showSnackBar(
+                  context: context,
+                  color: Colors.green,
+                  exception: 'registration done successfully',
+                );
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  CustomAnimation.createRouteForSlideFromLeft(
+                    const LoginScreen(),
+                  ),
+                  (route) => false,
+                );
+              }
+            } catch (e) {
+              if (context.mounted) {
+                showSnackBar(context: context, exception: e, color: Colors.red);
+              }
+            }
           }
         },
       ),
     );
   }
-}
-
-Route<void> _createRoute(Widget child) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(-1.0, 0.0); // 👈 from the left
-      const end = Offset.zero;
-      const curve = Curves.easeInOut;
-
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(position: animation.drive(tween), child: child);
-    },
-  );
 }
