@@ -5,5 +5,5 @@ class AppStrings {
   static const String passwordHintText = '••••••••';
   static const String loginScreenText = 'don\'t have an acoount?';
   static const String registerScreenText = 'already have an account?';
-  static const String formScreendTag = 'FormScreens';
+  static const String home = 'Home';
 }

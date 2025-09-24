@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:depi_task/helper/firebase_methods.dart';
+import 'package:depi_task/screens/home_screen.dart';
 import 'package:depi_task/screens/register_screen.dart';
 import 'package:depi_task/utils/app_strings.dart';
 import 'package:depi_task/widgets/form_body.dart';
@@ -14,19 +16,32 @@ class LoginScreen extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: const Text('Login')),
       body: FormBody(
         mainButtonTitle: AppStrings.login,
         secondButtonTitle: AppStrings.register,
         text: AppStrings.loginScreenText,
-        mainButtonOnTap: () {
+        mainButtonOnTap: () async {
           if (loginKey.currentState!.validate()) {
-            log('Validated');
+            try {
+              await FirebaseMethods.loginWithEmailAndPassword(
+                emailAddress: emailController.text,
+                password: passwordController.text,
+              );
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                _createRouteForFadeTransition(const HomeScreen()),
+                (route) => false,
+              );
+            } catch (e) {
+              log(e.toString());
+            }
           }
         },
         secondButtonOnTap: () => Navigator.pushAndRemoveUntil(
           context,
-          _createRoute(RegisterScreen()),
+          _createRouteForFromLeftTransition(const RegisterScreen()),
           (route) => false,
         ),
         globalKey: loginKey,
@@ -37,7 +52,7 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
-Route<void> _createRoute(Widget child) {
+Route<void> _createRouteForFromLeftTransition(Widget child) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => child,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -48,6 +63,15 @@ Route<void> _createRoute(Widget child) {
       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
       return SlideTransition(position: animation.drive(tween), child: child);
+    },
+  );
+}
+
+Route<void> _createRouteForFadeTransition(Widget child) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(opacity: animation, child: child);
     },
   );
 }

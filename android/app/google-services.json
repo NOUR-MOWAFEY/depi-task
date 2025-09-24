@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "602985908259",
+    "project_id": "depi-2bdb6",
+    "storage_bucket": "depi-2bdb6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602985908259:android:0a3e89830e557774d14996",
+        "android_client_info": {
+          "package_name": "com.depi.proj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvzETSetAoF0REfQLs-WnU8fFsuCR8n88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602985908259:android:2fdbd2d290c04ca0d14996",
+        "android_client_info": {
+          "package_name": "com.example.depi_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvzETSetAoF0REfQLs-WnU8fFsuCR8n88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

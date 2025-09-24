@@ -35,8 +35,8 @@ class FormBody extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            Image.asset(AppImages.loginImage, height: 350, width: 350),
-            SizedBox(height: 32),
+            Image.asset(AppImages.login, height: 350, width: 350),
+            const SizedBox(height: 32),
 
             CustomTextFormField(
               validator: (value) =>
@@ -44,7 +44,7 @@ class FormBody extends StatelessWidget {
               hintText: AppStrings.emailHintText,
               controller: emailController,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             CustomTextFormField(
               validator: (value) =>
                   AppValidator.validator(value, InputType.password),
@@ -52,20 +52,20 @@ class FormBody extends StatelessWidget {
               obscure: true,
               controller: passwordController,
             ),
-            SizedBox(height: 32),
-            CustomButton(title: mainButtonTitle, onTap: mainButtonOnTap ,),
+            const SizedBox(height: 32),
+            CustomButton(title: mainButtonTitle, onTap: mainButtonOnTap),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   text,
-                  style: TextStyle(fontSize: 16, color: AppColors.black),
+                  style: const TextStyle(fontSize: 16, color: AppColors.white),
                 ),
-                SizedBox(width: 6),
+                const SizedBox(width: 6),
                 CustomButton(
                   title: secondButtonTitle,
                   color: Colors.transparent,
-                  textColor: AppColors.black,
+                  textColor: AppColors.white,
                   // width: 90,
                   fontSize: 16,
                   onTap: secondButtonOnTap,

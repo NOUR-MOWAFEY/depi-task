@@ -3,6 +3,8 @@ import 'package:depi_task/utils/app_strings.dart';
 import 'package:depi_task/widgets/form_body.dart';
 import 'package:flutter/material.dart';
 
+import '../helper/firebase_methods.dart';
+
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -13,14 +15,14 @@ class RegisterScreen extends StatelessWidget {
     final passwordController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppStrings.register)),
+      appBar: AppBar(title: const Text(AppStrings.register)),
       body: FormBody(
         mainButtonTitle: AppStrings.register,
         secondButtonTitle: AppStrings.login,
         text: AppStrings.registerScreenText,
         secondButtonOnTap: () => Navigator.pushAndRemoveUntil(
           context,
-          _createRoute(LoginScreen()),
+          _createRoute(const LoginScreen()),
           (route) => false,
         ),
         globalKey: registerKey,
@@ -28,9 +30,13 @@ class RegisterScreen extends StatelessWidget {
         passwordController: passwordController,
         mainButtonOnTap: () {
           if (registerKey.currentState!.validate()) {
+            FirebaseMethods.createAccount(
+              emailAddress: emailController.text,
+              password: passwordController.text,
+            );
             Navigator.pushAndRemoveUntil(
               context,
-              _createRoute(LoginScreen()),
+              _createRoute(const LoginScreen()),
               (route) => false,
             );
           }
