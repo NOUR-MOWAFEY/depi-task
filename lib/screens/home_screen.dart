@@ -1,10 +1,10 @@
-import '../widgets/exit_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubits/popular_cubit/popular_cubit.dart';
 import '../models/popular_model.dart';
 import '../utils/app_strings.dart';
+import '../widgets/exit_icon.dart';
 import '../widgets/failed_home_screen_body.dart';
 import '../widgets/loading_home_screen_body.dart';
 import '../widgets/success_home_screen_body.dart';

@@ -1,19 +1,15 @@
-import 'dart:developer';
-
-import '../helper/animation.dart';
-import '../helper/firebase_methods.dart';
+import '../cubits/auth_cubit/auth_cubit.dart';
 import '../helper/show_snack_bar.dart';
-import 'home_screen.dart';
-import 'register_screen.dart';
-import '../utils/app_strings.dart';
-import '../widgets/form_body.dart';
+import '../widgets/login_screen_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, this.message});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
+  final String? message;
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -24,45 +20,32 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: FormBody(
-        mainButtonTitle: AppStrings.login,
-        secondButtonTitle: AppStrings.register,
-        text: AppStrings.loginScreenText,
-        mainButtonOnTap: () async {
-          if (loginKey.currentState!.validate()) {
-            try {
-              await FirebaseMethods.loginWithEmailAndPassword(
-                emailAddress: emailController.text,
-                password: passwordController.text,
-              );
-              if (context.mounted) {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  CustomAnimation.createRouteForFadeTransition(
-                    const HomeScreen(),
-                  ),
-                  (route) => false,
-                );
-              }
-            } catch (e) {
-              if (context.mounted) {
-                showSnackBar(context: context, exception: e, color: Colors.red);
-              }
-              log(e.toString());
-            }
-          }
-        },
-        secondButtonOnTap: () => Navigator.pushAndRemoveUntil(
-          context,
-          CustomAnimation.createRouteForSlideFromRight(const RegisterScreen()),
-          (route) => false,
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthUnAuthenticated && state.msg != null) {
+          showSnackBar(
+            context: context,
+            color: Colors.red,
+            exception: state.msg,
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text('Login')),
+        body: LoginScreenBody(
+          message: widget.message,
+          emailController: emailController,
+          passwordController: passwordController,
+          loginKey: loginKey,
         ),
-        globalKey: loginKey,
-        emailController: emailController,
-        passwordController: passwordController,
       ),
     );
   }

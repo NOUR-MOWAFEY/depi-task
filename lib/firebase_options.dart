@@ -41,46 +41,47 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBoH4tu2YTwU0CD2TsdCxrPTAYwfCdwqrk',
-    appId: '1:602985908259:web:87af1cf2bffc818ed14996',
-    messagingSenderId: '602985908259',
-    projectId: 'depi-2bdb6',
-    authDomain: 'depi-2bdb6.firebaseapp.com',
-    storageBucket: 'depi-2bdb6.firebasestorage.app',
+    apiKey: 'AIzaSyAfISiU_6gM931k1phLXFkZMhpBNNH3M3I',
+    appId: '1:31775963057:web:45c9c57f4ccd7db6712f90',
+    messagingSenderId: '31775963057',
+    projectId: 'depi-task',
+    authDomain: 'depi-task.firebaseapp.com',
+    storageBucket: 'depi-task.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAvzETSetAoF0REfQLs-WnU8fFsuCR8n88',
-    appId: '1:602985908259:android:2fdbd2d290c04ca0d14996',
-    messagingSenderId: '602985908259',
-    projectId: 'depi-2bdb6',
-    storageBucket: 'depi-2bdb6.firebasestorage.app',
+    apiKey: 'AIzaSyC6gEmnfJ-nz3O7xx-_u-7Xc-VgxX-tf10',
+    appId: '1:31775963057:android:373c6df7eb060c31712f90',
+    messagingSenderId: '31775963057',
+    projectId: 'depi-task',
+    storageBucket: 'depi-task.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCOSHSvxdLeyqlFD2BYIAMhIbuSNEcLr3A',
-    appId: '1:602985908259:ios:03a8685a52f5dbfad14996',
-    messagingSenderId: '602985908259',
-    projectId: 'depi-2bdb6',
-    storageBucket: 'depi-2bdb6.firebasestorage.app',
+    apiKey: 'AIzaSyBA3j2M5kpxC5gihW8_Mt3RMiCx5MCPjjE',
+    appId: '1:31775963057:ios:05c7b700019eebbf712f90',
+    messagingSenderId: '31775963057',
+    projectId: 'depi-task',
+    storageBucket: 'depi-task.firebasestorage.app',
     iosBundleId: 'com.example.depiTask',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCOSHSvxdLeyqlFD2BYIAMhIbuSNEcLr3A',
-    appId: '1:602985908259:ios:03a8685a52f5dbfad14996',
-    messagingSenderId: '602985908259',
-    projectId: 'depi-2bdb6',
-    storageBucket: 'depi-2bdb6.firebasestorage.app',
+    apiKey: 'AIzaSyBA3j2M5kpxC5gihW8_Mt3RMiCx5MCPjjE',
+    appId: '1:31775963057:ios:05c7b700019eebbf712f90',
+    messagingSenderId: '31775963057',
+    projectId: 'depi-task',
+    storageBucket: 'depi-task.firebasestorage.app',
     iosBundleId: 'com.example.depiTask',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBoH4tu2YTwU0CD2TsdCxrPTAYwfCdwqrk',
-    appId: '1:602985908259:web:7c817a4b974e2ca9d14996',
-    messagingSenderId: '602985908259',
-    projectId: 'depi-2bdb6',
-    authDomain: 'depi-2bdb6.firebaseapp.com',
-    storageBucket: 'depi-2bdb6.firebasestorage.app',
+    apiKey: 'AIzaSyAfISiU_6gM931k1phLXFkZMhpBNNH3M3I',
+    appId: '1:31775963057:web:2fbf837f91693aaa712f90',
+    messagingSenderId: '31775963057',
+    projectId: 'depi-task',
+    authDomain: 'depi-task.firebaseapp.com',
+    storageBucket: 'depi-task.firebasestorage.app',
   );
+
 }

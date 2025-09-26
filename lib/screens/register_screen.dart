@@ -1,17 +1,17 @@
-import 'package:flutter/material.dart';
-
-import '../helper/animation.dart';
-import '../helper/firebase_methods.dart';
+import '../cubits/auth_cubit/auth_cubit.dart';
 import '../helper/show_snack_bar.dart';
+import '../widgets/register_screen_body.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../utils/app_strings.dart';
-import '../widgets/form_body.dart';
-import 'login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
+  static String? message;
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
@@ -22,49 +22,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final passwordController = TextEditingController();
 
   @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text(AppStrings.register)),
-      body: FormBody(
-        mainButtonTitle: AppStrings.register,
-        secondButtonTitle: AppStrings.login,
-        text: AppStrings.registerScreenText,
-        secondButtonOnTap: () => Navigator.pushAndRemoveUntil(
-          context,
-          CustomAnimation.createRouteForSlideFromLeft(const LoginScreen()),
-          (route) => false,
+    return BlocListener<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state is AuthUnAuthenticated && state.msg != null) {
+          showSnackBar(
+            context: context,
+            color: Colors.red,
+            exception: state.msg.toString(),
+          );
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(title: const Text(AppStrings.register)),
+        body: RegisterScreenBody(
+          emailController: emailController,
+          passwordController: passwordController,
+          registerKey: registerKey,
         ),
-        globalKey: registerKey,
-        emailController: emailController,
-        passwordController: passwordController,
-        mainButtonOnTap: () async {
-          if (registerKey.currentState!.validate()) {
-            try {
-              await FirebaseMethods.createAccount(
-                emailAddress: emailController.text,
-                password: passwordController.text,
-              );
-              if (context.mounted) {
-                showSnackBar(
-                  context: context,
-                  color: Colors.green,
-                  exception: 'registration done successfully',
-                );
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  CustomAnimation.createRouteForSlideFromLeft(
-                    const LoginScreen(),
-                  ),
-                  (route) => false,
-                );
-              }
-            } catch (e) {
-              if (context.mounted) {
-                showSnackBar(context: context, exception: e, color: Colors.red);
-              }
-            }
-          }
-        },
       ),
     );
   }

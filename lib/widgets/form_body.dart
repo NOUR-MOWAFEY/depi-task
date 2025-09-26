@@ -1,10 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '../utils/app_colors.dart';
 import '../utils/app_images.dart';
 import '../utils/app_strings.dart';
 import '../utils/app_validator.dart';
 import 'custom_button.dart';
 import 'custom_text_form_field.dart';
-import 'package:flutter/material.dart';
 
 class FormBody extends StatelessWidget {
   const FormBody({
