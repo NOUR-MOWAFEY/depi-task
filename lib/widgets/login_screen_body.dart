@@ -1,10 +1,10 @@
-import '../cubits/auth_cubit/auth_cubit.dart';
-import '../screens/auth_gate.dart';
-import '../screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/auth_cubit/auth_cubit.dart';
 import '../helper/animation.dart';
+import '../screens/auth_gate.dart';
+import '../screens/register_screen.dart';
 import '../utils/app_strings.dart';
 import '../widgets/form_body.dart';
 
@@ -29,18 +29,16 @@ class LoginScreenBody extends StatelessWidget {
       text: AppStrings.loginScreenText,
       mainButtonOnTap: () async {
         if (loginKey.currentState!.validate()) {
-          await BlocProvider.of<AuthCubit>(context).signinWithEmailAndPassword(
+          context.read<AuthCubit>().signinWithEmailAndPassword(
             emailController.text,
             passwordController.text,
           );
 
-          if (context.mounted) {
-            Navigator.pushAndRemoveUntil(
-              context,
-              CustomAnimation.createRouteForFadeTransition(const AuthGate()),
-              (route) => false,
-            );
-          }
+          Navigator.pushAndRemoveUntil(
+            context,
+            CustomAnimation.createRouteForFadeTransition(const AuthGate()),
+            (route) => false,
+          );
         }
       },
       secondButtonOnTap: () => Navigator.pushAndRemoveUntil(

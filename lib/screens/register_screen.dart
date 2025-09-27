@@ -1,10 +1,10 @@
-import '../cubits/auth_cubit/auth_cubit.dart';
-import '../helper/show_snack_bar.dart';
-import '../widgets/register_screen_body.dart';
+import '../widgets/loading_home_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/auth_cubit/auth_cubit.dart';
 import '../utils/app_strings.dart';
+import '../widgets/register_screen_body.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -30,23 +30,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is AuthUnAuthenticated && state.msg != null) {
-          showSnackBar(
-            context: context,
-            color: Colors.red,
-            exception: state.msg.toString(),
-          );
-        }
-      },
-      child: Scaffold(
-        appBar: AppBar(title: const Text(AppStrings.register)),
-        body: RegisterScreenBody(
-          emailController: emailController,
-          passwordController: passwordController,
-          registerKey: registerKey,
-        ),
+    return Scaffold(
+      appBar: AppBar(title: const Text(AppStrings.register)),
+      body: BlocConsumer<AuthCubit, AuthState>(
+        listener: (BuildContext context, AuthState state) {
+          context.read<AuthCubit>().onRegisterCompleted(state, context);
+        },
+        builder: (context, state) {
+          return state is AuthLoading
+              ? LoadingScreenBody()
+              : RegisterScreenBody(
+                  emailController: emailController,
+                  passwordController: passwordController,
+                  registerKey: registerKey,
+                );
+        },
       ),
     );
   }

@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_images.dart';
 
-class HomeContainer extends StatelessWidget {
-  const HomeContainer({
-    super.key,
-    required this.name,
-    required this.description,
-  });
+class PopularItem extends StatelessWidget {
+  const PopularItem({super.key, required this.name, required this.description});
   final String? name;
   final String? description;
 
@@ -17,7 +13,7 @@ class HomeContainer extends StatelessWidget {
     return Container(
       height: 150,
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.white),
+        border: Border.all(color: AppColors.white, width: 2),
         color: AppColors.primaryColor,
         borderRadius: BorderRadius.circular(16),
       ),

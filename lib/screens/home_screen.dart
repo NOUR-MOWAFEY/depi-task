@@ -34,10 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [ExitIcon(), SizedBox(width: 6)],
           ),
           body: switch (state) {
-            PopularInitial() => const LoadingHomeScreenBody(),
-            PopularLoading() => const LoadingHomeScreenBody(),
-            PopularSuccess state => SuccessHomeScreenBody(state: state),
-            PopularFailed() => const FailedHomeScreenBody(),
+            PopularInitial() => const LoadingScreenBody(),
+            PopularLoading() => const LoadingScreenBody(),
+            PopularSuccess state => HomeScreenBody(state: state),
+            PopularFailed() => const HomeScreenFailedBody(),
           },
         );
       },

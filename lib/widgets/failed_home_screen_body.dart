@@ -1,8 +1,9 @@
-import '../utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class FailedHomeScreenBody extends StatelessWidget {
-  const FailedHomeScreenBody({super.key});
+import '../utils/app_colors.dart';
+
+class HomeScreenFailedBody extends StatelessWidget {
+  const HomeScreenFailedBody({super.key});
 
   @override
   Widget build(BuildContext context) {

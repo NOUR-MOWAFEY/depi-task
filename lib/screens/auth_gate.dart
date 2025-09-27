@@ -1,11 +1,11 @@
-import '../cubits/auth_cubit/auth_cubit.dart';
-import '../cubits/popular_cubit/popular_cubit.dart';
-import '../helper/show_snack_bar.dart';
-import 'home_screen.dart';
-import 'login_screen.dart';
-import '../widgets/loading_home_screen_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubits/auth_cubit/auth_cubit.dart';
+import '../cubits/popular_cubit/popular_cubit.dart';
+import '../widgets/loading_home_screen_body.dart';
+import 'home_screen.dart';
+import 'login_screen.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});
@@ -15,7 +15,7 @@ class AuthGate extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthState>(
       builder: (context, state) {
         if (state is AuthInitial || state is AuthLoading) {
-          return const Scaffold(body: LoadingHomeScreenBody());
+          return const Scaffold(body: LoadingScreenBody());
         }
         if (state is AuthAuthenticated) {
           return BlocProvider(
@@ -29,10 +29,9 @@ class AuthGate extends StatelessWidget {
       },
       listener: (BuildContext context, AuthState state) {
         if (state is AuthUnAuthenticated && state.msg != null) {
-          showSnackBar(
+          context.read<AuthCubit>().showFailedSnackBar(
             context: context,
-            color: Colors.red,
-            exception: state.msg.toString(),
+            message: state.msg ?? 'Error',
           );
         }
       },

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
 
-class LoadingHomeScreenBody extends StatelessWidget {
-  const LoadingHomeScreenBody({super.key});
+class LoadingScreenBody extends StatelessWidget {
+  const LoadingScreenBody({super.key});
 
   @override
   Widget build(BuildContext context) {
