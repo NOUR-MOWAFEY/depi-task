@@ -1,16 +1,87 @@
-# depi_task
+# Flutter Authentication & Populars App
 
-A new Flutter project.
+This Flutter app demonstrates authentication, registration, and data fetching with smooth UI animations. It is built using **Bloc/Cubit state management** for clean separation of logic and UI.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+* **Authentication Flow**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  * On startup, the app checks if the user is authenticated.
+  * If authenticated → navigates to the **Home Screen**.
+  * If not authenticated → navigates to the **Login Screen**.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* **Home Screen**
+
+  * Shows a list of "populars" with:
+
+    * Name
+    * Image
+    * Description
+  * Items are displayed with a **fade-in opacity animation**.
+  * Uses a dedicated **PopularCubit** to manage fetching and state.
+
+* **Register Screen**
+
+  * Handles user registration.
+  * State management:
+
+    * **Loading** → shows a loading screen.
+    * **Success** → shows a success snackbar and navigates back to the Login Screen.
+    * **Failure** → shows an error snackbar with the failure message.
+
+* **Error & Loading Handling**
+
+  * Centralized error handling with snackbars for authentication and registration.
+  * Dedicated loading widgets for better user experience.
+
+---
+
+## State Management
+
+* **AuthCubit**
+
+  * Handles user authentication and login/logout states.
+  * Emits:
+
+    * `AuthInitial`, `AuthLoading`, `AuthAuthenticated`, `AuthUnAuthenticated`.
+
+* **PopularCubit**
+
+  * Handles fetching of "populars" data.
+  * Emits:
+
+    * `PopularLoading` → while fetching data.
+    * `PopularSuccess` → when data is successfully loaded.
+    * `PopularFailed` → when fetching data fails.
+
+---
+
+## UI Flow
+
+1. **AuthGate** (root screen)
+
+   * Shows `LoadingScreen` while checking state.
+   * Navigates to:
+
+     * `HomeScreen` if authenticated.
+     * `LoginScreen` if not authenticated.
+
+2. **HomeScreen**
+
+   * Displays list of popular items with opacity animation.
+   * Can navigate to **RegisterScreen**.
+
+3. **RegisterScreen**
+
+   * On success → Snackbar + Navigate to Login.
+   * On error → Snackbar with error message.
+
+---
+
+## Tech Stack
+
+* **Flutter** (UI framework)
+* **flutter_bloc** (state management)
+* **Material Design** (UI components)
