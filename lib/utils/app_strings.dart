@@ -6,4 +6,5 @@ class AppStrings {
   static const String loginScreenText = 'don\'t have an acoount?';
   static const String registerScreenText = 'already have an account?';
   static const String home = 'Home';
+  static String? fCMKey;
 }
