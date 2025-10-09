@@ -11,13 +11,15 @@ class ExitIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed: () {
-        BlocProvider.of<AuthCubit>(context).signOut();
-        Navigator.pushAndRemoveUntil(
-          context,
-          CustomAnimation.createRouteForFadeTransition(LoginScreen()),
-          (route) => false,
-        );
+      onPressed: () async {
+        await BlocProvider.of<AuthCubit>(context).signOut();
+        if (context.mounted) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            CustomAnimation.createRouteForFadeTransition(LoginScreen()),
+            (route) => false,
+          );
+        }
       },
       icon: Icon(Icons.logout),
     );

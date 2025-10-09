@@ -4,6 +4,7 @@ import '../utils/app_colors.dart';
 
 ThemeData mainTheme() {
   return ThemeData(
+    brightness: Brightness.dark,
     scaffoldBackgroundColor: AppColors.primaryColor,
     fontFamily: 'Exo2',
     // brightness: Brightness.dark,

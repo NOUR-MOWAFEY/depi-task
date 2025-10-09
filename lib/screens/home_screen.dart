@@ -1,10 +1,9 @@
+import 'package:depi_task/cubits/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../cubits/popular_cubit/popular_cubit.dart';
 import '../models/popular_model.dart';
-import '../utils/app_strings.dart';
-import '../widgets/exit_icon.dart';
 import '../widgets/failed_home_screen_body.dart';
 import '../widgets/loading_home_screen_body.dart';
 import '../widgets/success_home_screen_body.dart';
@@ -20,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   PopularModel? popular;
   @override
   void initState() {
+    BlocProvider.of<AuthCubit>(context).getpersonalData();
     BlocProvider.of<PopularCubit>(context).getData();
     super.initState();
   }
@@ -28,18 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<PopularCubit, PopularState>(
       builder: (context, state) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text(AppStrings.home),
-            actions: [ExitIcon(), SizedBox(width: 6)],
-          ),
-          body: switch (state) {
-            PopularInitial() => const LoadingScreenBody(),
-            PopularLoading() => const LoadingScreenBody(),
-            PopularSuccess state => HomeScreenBody(state: state),
-            PopularFailed() => const HomeScreenFailedBody(),
-          },
-        );
+        return switch (state) {
+          PopularInitial() => const LoadingScreenBody(),
+          PopularLoading() => const LoadingScreenBody(),
+          PopularSuccess state => HomeScreenBody(state: state),
+          PopularFailed() => const HomeScreenFailedBody(),
+        };
+        // return Scaffold(
+
+        // );
       },
     );
   }

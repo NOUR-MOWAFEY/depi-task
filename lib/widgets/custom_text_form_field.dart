@@ -1,3 +1,4 @@
+import 'package:depi_task/utils/app_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
@@ -8,26 +9,33 @@ class CustomTextFormField extends StatelessWidget {
     this.hintText,
     this.obscure = false,
     required this.controller,
-    this.validator,
+    required this.inputType,
+    this.enabled = true,
   });
   final String? hintText;
   final bool? obscure;
+  final bool? enabled;
   final TextEditingController controller;
-  final String? Function(String?)? validator;
+  final InputType inputType;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
       style: const TextStyle(color: AppColors.white),
-      validator: validator,
+      validator: (input) {
+        return AppValidator.validator(input, inputType);
+      },
       controller: controller,
       cursorColor: AppColors.white,
       obscureText: obscure!,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(color: AppColors.white),
         border: customOutlineInputBorder(color: AppColors.primaryColor),
         focusedBorder: customOutlineInputBorder(borderWidth: 2),
+        disabledBorder: customOutlineInputBorder(color: Colors.blueGrey),
       ),
     );
   }

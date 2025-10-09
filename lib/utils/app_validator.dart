@@ -10,9 +10,9 @@ class AppValidator {
       if (input!.length < 8) {
         return 'Password must have at least 8 characters';
       }
-    } else if (type == InputType.phoneNumber) {
-      if (input!.length < 11) {
-        return 'Invalid Phone Number';
+    } else if (type == InputType.firstName || type == InputType.lastName) {
+      if (input == null) {
+        return 'Required Field';
       }
     } else {
       return null;
@@ -21,6 +21,6 @@ class AppValidator {
   }
 }
 
-enum InputType { email, password, phoneNumber }
+enum InputType { email, password, firstName, lastName }
 
 RegExp emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');

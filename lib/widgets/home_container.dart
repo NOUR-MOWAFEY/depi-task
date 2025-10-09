@@ -11,7 +11,7 @@ class PopularItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      // height: 150,
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.white, width: 2),
         color: AppColors.primaryColor,
@@ -46,6 +46,7 @@ class PopularItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
+                    maxLines: 1,
                     name ?? 'no name',
                     style: const TextStyle(
                       color: AppColors.white,

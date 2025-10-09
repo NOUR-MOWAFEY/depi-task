@@ -7,12 +7,16 @@ class HomeScreenFailedBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Something went wrong',
-      style: TextStyle(
-        color: AppColors.white,
-        fontWeight: FontWeight.bold,
-        fontSize: 24,
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'Something went wrong',
+          style: TextStyle(
+            color: AppColors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+          ),
+        ),
       ),
     );
   }

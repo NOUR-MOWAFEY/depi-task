@@ -8,7 +8,7 @@ class AuthRepo {
 
   Stream<User?> authStateChange() => _auth.authStateChanges();
 
-   User? get currentUser => _auth.currentUser;
+  User? get currentUser => _auth.currentUser;
 
   Future<UserCredential> registerWithEmailAndPassword(
     String email,
@@ -30,6 +30,10 @@ class AuthRepo {
 
   Future<void> resetPassword(String email) {
     return _auth.sendPasswordResetEmail(email: email);
+  }
+
+  Future<void> deleteUser() async {
+    await _auth.currentUser!.delete();
   }
 
   Future<void> signOut() {
